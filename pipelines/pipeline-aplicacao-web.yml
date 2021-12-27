@@ -5,7 +5,7 @@ trigger:
   paths:
     include:
       - src/AplicacaoWeb/AplicacaoWeb/*
-      - manifests/AplicacaoWeb/manifest-aplicacao-web.yml
+      - manifests/AplicacaoWeb/manifest.yml
       - pipelines/pipeline-aplicacao-web.yml
 
 resources:
@@ -15,7 +15,7 @@ resources:
       name: Infraestrutura/_git/template-pipelines
 
 extends:
-  template: build/dotnet.yaml@template-pipelines
+  template: build/dotnet.yml@template-pipelines
   parameters:
     Projeto: AplicacaoWeb
     NomeImagem: aplicacao-web
