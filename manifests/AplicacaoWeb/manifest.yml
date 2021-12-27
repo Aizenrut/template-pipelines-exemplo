@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: #{kubernetesProjectName}#
+  namespace: default
+  labels:
+    app: #{kubernetesProjectName}#
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: #{kubernetesProjectName}#
+  template:
+    metadata:
+      labels:
+        app: #{kubernetesProjectName}#
+    spec:
+      containers:
+        - name: #{kubernetesProjectName}#
+          image: #{imageRepository}#:#{version}#
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: exemplo-aks-ips
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: #{kubernetesProjectName}#-service
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    app: #{kubernetesProjectName}#
+  ports:
+    - port: 80

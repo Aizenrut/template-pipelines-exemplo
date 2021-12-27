@@ -1,0 +1,24 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - src/AplicacaoWeb/AplicacaoWeb/*
+      - manifests/AplicacaoWeb/manifest-aplicacao-web.yml
+      - pipelines/pipeline-aplicacao-web.yml
+
+resources:
+  repositories:
+    - repository: template-pipelines
+      type: git
+      name: Infraestrutura/_git/template-pipelines
+
+extends:
+  template: build/dotnet.yaml@template-pipelines
+  parameters:
+    Projeto: AplicacaoWeb
+    NomeImagem: aplicacao-web
+    TestesAdicionais:
+      - AplicacaoWeb.Dominio.Testes
+      - AplicacaoWeb.Integracao.Testes
